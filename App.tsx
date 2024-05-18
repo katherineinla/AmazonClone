@@ -7,10 +7,18 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import {useColorScheme, SafeAreaView, StatusBar} from 'react-native';
+import {useColorScheme, SafeAreaView, StatusBar, Button} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Router from './src/router';
+
+import {Amplify} from 'aws-amplify';
+import {
+  withAuthenticator,
+} from '@aws-amplify/ui-react-native';
+
+import amplifyconfig from './src/amplifyconfiguration.json';
+Amplify.configure(amplifyconfig);
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,4 +39,4 @@ function App(): React.JSX.Element {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
